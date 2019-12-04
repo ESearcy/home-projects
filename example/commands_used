@@ -1,0 +1,10 @@
+guide https://pragmaticstudio.com/tutorials/how-to-setup-graphql-in-a-phoenix-app
+
+mix phx.new example --no-html --no-webpack
+mix phx.gen.context Vacation Place places name:string location:string max_guests:integer
+
+mix ecto.create
+mix ecto.migrate
+
+mix run priv/repo/seeds.exs
+
