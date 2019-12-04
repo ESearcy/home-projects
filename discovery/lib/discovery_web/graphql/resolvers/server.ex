@@ -16,7 +16,7 @@ defmodule DiscoveryWeb.Resolvers.Routing.Server do
   end
 
   def update_server(_, args, _) do
-    with {:ok, server} <- Routing.get_server!(args.input.id) |> Routing.update_server(args.input) do
+    with {:ok, server} <- Routing.get_server!(args.input.id) |> Routing.update_server(args) do
       {:ok, %{message: "server updated"}}
     end
   end
