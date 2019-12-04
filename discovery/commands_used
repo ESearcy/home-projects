@@ -1,0 +1,21 @@
+guide https://pragmaticstudio.com/tutorials/how-to-setup-graphql-in-a-phoenix-app
+
+`mix phx.new discovery --no-html --no-webpack`
+`mix phx.gen.context Routing Server servers alias:string type:string local_ip:string public_ip:string memory_max:float memory_available:float containers_available:integer containers_max:integer temp:float`
+
+`mix ecto.create`
+`mix ecto.migrate`
+
+`mix run priv/repo/seeds.exs`
+
+Start with:
+
+`mix phx.server`
+
+inside IEx (Interactive Elixir) as:
+
+`iex -S mix phx.server`
+
+
+strap on the GraphQL layer
+model from this PR: 
