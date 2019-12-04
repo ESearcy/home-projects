@@ -10,8 +10,8 @@ defmodule Discovery.Routing.Server do
     field(:memory_available, :float)
     field(:memory_max, :float)
     field(:public_ip, :string)
-    field(:temp, :integer)
-    field(:type, :float)
+    field(:temp, :float)
+    field(:type, :string)
 
     timestamps()
   end
@@ -30,16 +30,17 @@ defmodule Discovery.Routing.Server do
       :containers_max,
       :temp
     ])
-    |> validate_required([
-      :alias,
-      :type,
-      :local_ip,
-      :public_ip,
-      :memory_max,
-      :memory_available,
-      :containers_available,
-      :containers_max,
-      :temp
-    ])
+
+    # |> validate_required([
+    #  :alias,
+    #  :type,
+    #  :local_ip,
+    #  :public_ip,
+    #  :memory_max,
+    #  :memory_available,
+    #  :containers_available,
+    #  :containers_max,
+    #  :temp
+    # ])
   end
 end
