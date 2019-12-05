@@ -1,4 +1,4 @@
-defmodule GondorWeb.Graphql.Middleware.ErrorResolver do
+defmodule DiscoveryWeb.Graphql.Middleware.ErrorResolver do
   @moduledoc """
   Converts `Ecto.Changeset` errors for Graphql
   """

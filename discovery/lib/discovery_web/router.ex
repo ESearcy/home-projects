@@ -8,10 +8,10 @@ defmodule DiscoveryWeb.Router do
   scope "/" do
     pipe_through(:api)
 
-    forward("/api", Absinthe.Plug, schema: DiscoveryWeb.Schema.MasterSchema)
+    forward("/api", Absinthe.Plug, schema: DiscoveryWeb.Graphql.Schema.MasterSchema)
 
     forward("/graphiql", Absinthe.Plug.GraphiQL,
-      schema: DiscoveryWeb.Schema.MasterSchema,
+      schema: DiscoveryWeb.Graphql.Schema.MasterSchema,
       interface: :advanced
     )
   end

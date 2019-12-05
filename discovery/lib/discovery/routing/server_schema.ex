@@ -1,4 +1,4 @@
-defmodule Discovery.Routing.Server do
+defmodule Discovery.Routing.ServerSchema do
   use Ecto.Schema
   import Ecto.Changeset
 

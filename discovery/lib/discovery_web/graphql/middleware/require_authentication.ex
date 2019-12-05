@@ -1,4 +1,4 @@
-defmodule GondorWeb.Graphql.Middleware.RequireAuthentication do
+defmodule DiscoveryWeb.Graphql.Middleware.RequireAuthentication do
   @moduledoc """
   Requires that an authenticated user is available in resolution's context map
   """

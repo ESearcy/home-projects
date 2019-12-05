@@ -1,4 +1,4 @@
-defmodule Discovery.Routing do
+defmodule Discovery.Routing.ServerContext do
   @moduledoc """
   The Routing context.
   """
@@ -6,7 +6,7 @@ defmodule Discovery.Routing do
   import Ecto.Query, warn: false
   alias Discovery.Repo
 
-  alias Discovery.Routing.Server
+  alias Discovery.Routing.ServerSchema
 
   @doc """
   Returns the list of servers.
@@ -18,7 +18,7 @@ defmodule Discovery.Routing do
 
   """
   def list_servers do
-    Repo.all(Server)
+    Repo.all(ServerSchema)
   end
 
   @doc """
@@ -35,7 +35,7 @@ defmodule Discovery.Routing do
       ** (Ecto.NoResultsError)
 
   """
-  def get_server!(id), do: Repo.get!(Server, id)
+  def get_server!(id), do: Repo.get!(ServerSchema, id)
 
   @doc """
   Creates a server.
@@ -50,8 +50,8 @@ defmodule Discovery.Routing do
 
   """
   def create_server(attrs \\ %{}) do
-    %Server{}
-    |> Server.changeset(attrs)
+    %ServerSchema{}
+    |> ServerSchema.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -67,9 +67,9 @@ defmodule Discovery.Routing do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_server(%Server{} = server, attrs) do
+  def update_server(%ServerSchema{} = server, attrs) do
     server
-    |> Server.changeset(attrs)
+    |> ServerSchema.changeset(attrs)
     |> Repo.update()
   end
 
@@ -85,7 +85,7 @@ defmodule Discovery.Routing do
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_server(%Server{} = server) do
+  def delete_server(%ServerSchema{} = server) do
     Repo.delete(server)
   end
 
@@ -98,7 +98,7 @@ defmodule Discovery.Routing do
       %Ecto.Changeset{source: %Server{}}
 
   """
-  def change_server(%Server{} = server) do
-    Server.changeset(server, %{})
+  def change_server(%ServerSchema{} = server) do
+    ServerSchema.changeset(server, %{})
   end
 end

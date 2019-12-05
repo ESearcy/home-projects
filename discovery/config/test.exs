@@ -6,6 +6,7 @@ config :discovery, Discovery.Repo,
   password: "postgres",
   database: "discovery_test",
   hostname: "localhost",
+  port: 15432,
   pool: Ecto.Adapters.SQL.Sandbox
 
 # We don't run a server during test. If one is required,
