@@ -11,19 +11,19 @@ defmodule DiscoveryWeb.Resolvers.Routing.Server do
 
   def create_server(_, args, _) do
     with {:ok, _} <- Routing.create_server(args) do
-      {:ok, %{message: "server created"}}
+      {:ok, %{message: "server info saved"}}
     end
   end
 
   def update_server(_, args, _) do
     with {:ok, server} <- Routing.get_server!(args.input.id) |> Routing.update_server(args) do
-      {:ok, %{message: "server updated"}}
+      {:ok, %{message: "server info updated"}}
     end
   end
 
   def delete_server(_, %{id: id}, _) do
     with {:ok, _} <- Routing.get_server!(id) |> Routing.delete_server() do
-      {:ok, %{message: "server deleted"}}
+      {:ok, %{message: "server info deleted"}}
     end
   end
 end
