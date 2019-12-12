@@ -1,7 +1,7 @@
 defmodule Discovery.RoutingTest do
   use Discovery.DataCase
 
-  alias Discovery.Routing.ServerContext
+  alias Discovery.Routing.ServerRepository
 
   describe "servers" do
     alias Discovery.Routing.ServerSchema
@@ -44,23 +44,23 @@ defmodule Discovery.RoutingTest do
       {:ok, server} =
         attrs
         |> Enum.into(@valid_attrs)
-        |> ServerContext.create_server()
+        |> ServerRepository.create_server()
 
       server
     end
 
     test "list_servers/0 returns all servers" do
       server = server_fixture()
-      assert ServerContext.list_servers() == [server]
+      assert ServerRepository.list_servers() == [server]
     end
 
     test "get_server!/1 returns the server with given id" do
       server = server_fixture()
-      assert ServerContext.get_server!(server.id) == server
+      assert ServerRepository.get_server(server.id) == {:ok, server}
     end
 
     test "create_server/1 with valid data creates a server" do
-      assert {:ok, %ServerSchema{} = server} = ServerContext.create_server(@valid_attrs)
+      assert {:ok, %ServerSchema{} = server} = ServerRepository.create_server(@valid_attrs)
       assert server.alias == "some alias"
       assert server.containers_available == 42
       assert server.containers_max == 42
@@ -73,12 +73,15 @@ defmodule Discovery.RoutingTest do
     end
 
     test "create_server/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = ServerContext.create_server(@invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = ServerRepository.create_server(@invalid_attrs)
     end
 
     test "update_server/2 with valid data updates the server" do
       server = server_fixture()
-      assert {:ok, %ServerSchema{} = server} = ServerContext.update_server(server, @update_attrs)
+
+      assert {:ok, %ServerSchema{} = server} =
+               ServerRepository.update_server(server, @update_attrs)
+
       assert server.alias == "some updated alias"
       assert server.containers_available == 43
       assert server.containers_max == 43
@@ -92,19 +95,19 @@ defmodule Discovery.RoutingTest do
 
     test "update_server/2 with invalid data returns error changeset" do
       server = server_fixture()
-      assert {:error, %Ecto.Changeset{}} = ServerContext.update_server(server, @invalid_attrs)
-      assert server == ServerContext.get_server!(server.id)
+      assert {:error, %Ecto.Changeset{}} = ServerRepository.update_server(server, @invalid_attrs)
+      assert {:ok, server} == ServerRepository.get_server(server.id)
     end
 
     test "delete_server/1 deletes the server" do
       server = server_fixture()
-      assert {:ok, %ServerSchema{}} = ServerContext.delete_server(server)
-      assert_raise Ecto.NoResultsError, fn -> ServerContext.get_server!(server.id) end
+      assert {:ok, %ServerSchema{}} = ServerRepository.delete_server(server)
+      assert ServerRepository.get_server(server.id) == {:error, :not_found}
     end
 
     test "change_server/1 returns a server changeset" do
       server = server_fixture()
-      assert %Ecto.Changeset{} = ServerContext.change_server(server)
+      assert %Ecto.Changeset{} = ServerRepository.change_server(server)
     end
   end
 end

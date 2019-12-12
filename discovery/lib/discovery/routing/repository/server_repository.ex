@@ -41,7 +41,7 @@ defmodule Discovery.Routing.ServerRepository do
     ServerQueries.server()
     |> ServerQueries.filter(filter)
     |> ServerQueries.order_by_timestamp()
-    |> Queries.result_list(pagination)
+    |> CommonQueries.result_list(pagination)
   end
 
   @doc """
@@ -50,7 +50,7 @@ defmodule Discovery.Routing.ServerRepository do
   def get_server(id) do
     ServerQueries.server()
     |> ServerQueries.filter(:id, id)
-    |> Queries.result_one()
+    |> CommonQueries.result_one()
   end
 
   @doc """

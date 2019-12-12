@@ -23,6 +23,7 @@ defmodule DiscoveryWeb.Graphql.Routing.ServerResolvers do
   @spec list_servers_pagination(map, map) ::
           Resolvers.paginated_result_t(ServerSchema.t())
   def list_servers_pagination(args, _context) do
+    ## filter based on role access
     {filter, pagination} = get_args_fields(args)
 
     servers =
@@ -31,7 +32,6 @@ defmodule DiscoveryWeb.Graphql.Routing.ServerResolvers do
         pagination
       )
 
-    servers |> IO.inspect()
     servers
   end
 

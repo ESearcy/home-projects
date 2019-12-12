@@ -22,8 +22,8 @@ defmodule Discovery.Routing.ServerLogic do
   end
 
   def create_server(args) do
-    with {:ok, _} <- ServerRepository.create_server(args.input) do
-      {:ok, %{message: "server info saved"}}
+    with {:ok, server} <- ServerRepository.create_server(args.input) do
+      {:ok, Map.merge(%{message: "server info saved"}, server)}
     end
   end
 

@@ -16,13 +16,13 @@ defmodule DiscoveryWeb.Graphql.Routing.ServerSchemas do
   end
 
   object :server_mutations do
-    field(:create_server, :server_response) do
+    field(:create_server, :server_in_response) do
       arg(:input, non_null(:server_create))
 
       resolve(&DiscoveryWeb.Graphql.Routing.ServerResolvers.create_server/3)
     end
 
-    field(:update_server, :server_response) do
+    field(:update_server, :server_in_response) do
       arg(:input, non_null(:server_update))
 
       resolve(&DiscoveryWeb.Graphql.Routing.ServerResolvers.update_server/3)
@@ -68,6 +68,7 @@ defmodule DiscoveryWeb.Graphql.Routing.ServerSchemas do
     field(:public_ip, :string)
     field(:temp, :float)
     field(:type, :string)
+    field(:inserted_at, :string)
   end
 
   object :server do
@@ -81,6 +82,22 @@ defmodule DiscoveryWeb.Graphql.Routing.ServerSchemas do
     field(:public_ip, :string)
     field(:temp, :float)
     field(:type, :string)
+    field(:inserted_at, :string)
+  end
+
+  object :server_in_response do
+    field(:id, :id)
+    field(:alias, :string)
+    field(:containers_available, :integer)
+    field(:containers_max, :integer)
+    field(:local_ip, :string)
+    field(:memory_available, :float)
+    field(:memory_max, :float)
+    field(:public_ip, :string)
+    field(:temp, :float)
+    field(:type, :string)
+    field(:message, :string)
+    field(:inserted_at, :string)
   end
 
   object :server_response do
