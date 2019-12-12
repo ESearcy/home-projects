@@ -1,10 +1,10 @@
 defmodule Discovery.Routing.ServerLogic do
   alias Discovery.Routing.ServerRepository
 
-  def update_server(args) do
+  def update_server(input) do
     with {:ok, server} <-
-           ServerRepository.get_server(args.input.id),
-         {ok, _} <- ServerRepository.update_server(server, args.input) do
+           ServerRepository.get_server(input.id),
+         {ok, _} <- ServerRepository.update_server(server, input) do
       {:ok, Map.merge(%{message: "server info updated"}, server)}
     end
   end
@@ -21,8 +21,8 @@ defmodule Discovery.Routing.ServerLogic do
     ServerRepository.get_server(id)
   end
 
-  def create_server(args) do
-    with {:ok, server} <- ServerRepository.create_server(args.input) do
+  def create_server(input) do
+    with {:ok, server} <- ServerRepository.create_server(input) do
       {:ok, Map.merge(%{message: "server info saved"}, server)}
     end
   end
