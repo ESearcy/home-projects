@@ -1,4 +1,4 @@
-defmodule Discovery.Routing.ServerContext do
+defmodule Discovery.Routing.ServerRepository do
   @moduledoc """
   The Routing context.
   """
@@ -6,7 +6,9 @@ defmodule Discovery.Routing.ServerContext do
   import Ecto.Query, warn: false
   alias Discovery.Repo
 
+  alias Discovery.CommonQueries
   alias Discovery.Routing.ServerSchema
+  alias Discovery.Routing.ServerQueries
 
   @doc """
   Returns the list of servers.
@@ -35,7 +37,21 @@ defmodule Discovery.Routing.ServerContext do
       ** (Ecto.NoResultsError)
 
   """
-  def get_server!(id), do: Repo.get!(ServerSchema, id)
+  def list_servers_pagination(filter \\ %{}, pagination \\ %{}) do
+    ServerQueries.server()
+    |> ServerQueries.filter(filter)
+    |> ServerQueries.order_by_timestamp()
+    |> Queries.result_list(pagination)
+  end
+
+  @doc """
+  Gets a single server.
+  """
+  def get_server(id) do
+    ServerQueries.server()
+    |> ServerQueries.filter(:id, id)
+    |> Queries.result_one()
+  end
 
   @doc """
   Creates a server.

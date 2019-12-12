@@ -1,7 +1,7 @@
 alias Discovery.Repo
-alias Discovery.Routing.Server
+alias Discovery.Routing.ServerSchema
 
-%Server{
+%ServerSchema{
   alias: "seed",
   type: "mock",
   local_ip: "0.0.0.0",

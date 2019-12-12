@@ -4,6 +4,7 @@ defmodule DiscoveryWeb.Graphql.Schema.MasterSchema do
   # import_types(Absinthe.Type.Custom)
 
   import_types(DiscoveryWeb.Graphql.Routing.ServerSchemas)
+  import_types(DiscoveryWeb.Graphql.CommonSchema)
 
   query do
     import_fields(:server_queries)

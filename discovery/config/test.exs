@@ -15,5 +15,6 @@ config :discovery, DiscoveryWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+1
 # Print only warnings and errors during test
 config :logger, level: :warn

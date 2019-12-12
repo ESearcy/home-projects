@@ -2,8 +2,11 @@ defmodule DiscoveryWeb.Graphql.Routing.ServerSchemas do
   use Absinthe.Schema.Notation
 
   object :server_queries do
-    field :servers, list_of(:server) do
-      resolve(&DiscoveryWeb.Graphql.Routing.ServerResolvers.servers/3)
+    field :servers, :server_paginated_result do
+      arg(:filter, :server_filter)
+      arg(:pagination, :pagination_filter)
+
+      resolve(&DiscoveryWeb.Graphql.Routing.ServerResolvers.list_servers_pagination/2)
     end
 
     field :server, :server do
@@ -30,6 +33,20 @@ defmodule DiscoveryWeb.Graphql.Routing.ServerSchemas do
 
       resolve(&DiscoveryWeb.Graphql.Routing.ServerResolvers.delete_server/3)
     end
+  end
+
+  object :server_paginated_result do
+    @desc "currency Order list"
+    field(:list, list_of(non_null(:server)))
+    @desc "Pagination information."
+    field(:pagination, :pagination)
+  end
+
+  input_object :server_filter do
+    @desc "normal ID"
+    field(:id, :integer)
+    @desc "filter through currency orders based on type"
+    field(:type, :string)
   end
 
   input_object :server_create do
