@@ -6,6 +6,7 @@ config :discovery, Discovery.Repo,
   password: "postgres",
   database: "discovery_test",
   hostname: "localhost",
+  port: 5432,
   pool: Ecto.Adapters.SQL.Sandbox
 
 # We don't run a server during test. If one is required,
@@ -14,5 +15,6 @@ config :discovery, DiscoveryWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+1
 # Print only warnings and errors during test
 config :logger, level: :warn
