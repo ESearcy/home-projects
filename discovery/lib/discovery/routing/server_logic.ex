@@ -1,5 +1,5 @@
-defmodule Discovery.Routing.ServerLogic do
-  alias Discovery.Routing.ServerRepository
+defmodule Discovery.Routing.Logics.ServerLogic do
+  alias Discovery.Routing.Repositorys.ServerRepository
 
   def update_server(input) do
     with {:ok, server} <-

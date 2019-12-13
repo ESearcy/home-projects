@@ -1,4 +1,4 @@
-defmodule Discovery.Routing.ServerRepository do
+defmodule Discovery.Routing.Repositorys.ServerRepository do
   @moduledoc """
   The Routing context.
   """
@@ -7,8 +7,8 @@ defmodule Discovery.Routing.ServerRepository do
   alias Discovery.Repo
 
   alias Discovery.CommonQueries
-  alias Discovery.Routing.ServerSchema
-  alias Discovery.Routing.ServerQueries
+  alias Discovery.Routing.Schemas.ServerSchema
+  alias Discovery.Routing.Queries.ServerQueries
 
   @doc """
   Returns the list of servers.
