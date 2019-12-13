@@ -1,9 +1,9 @@
-defmodule Discovery.Routing.ServerQueries do
+defmodule Discovery.Routing.Queries.ServerQueries do
   @moduledoc """
   Composable Ecto queries for organizations.
   """
   import Ecto.Query, warn: false
-  alias Discovery.Routing.ServerSchema
+  alias Discovery.Routing.Schemas.ServerSchema
   @spec server :: Ecto.Query.t()
   def server do
     from(ServerSchema, as: :server)

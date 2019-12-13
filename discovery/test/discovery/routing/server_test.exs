@@ -1,10 +1,10 @@
 defmodule Discovery.RoutingTest do
   use Discovery.DataCase
 
-  alias Discovery.Routing.ServerRepository
+  alias Discovery.Routing.Repositorys.ServerRepository
 
   describe "servers" do
-    alias Discovery.Routing.ServerSchema
+    alias Discovery.Routing.Schemas.ServerSchema
 
     @valid_attrs %{
       alias: "some alias",

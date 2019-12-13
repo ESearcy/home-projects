@@ -1,17 +1,19 @@
-defmodule DiscoveryWeb.Graphql.Routing.ServerSchemas do
+defmodule DiscoveryWeb.Graphql.Routing.Schemas.ServerSchema do
   use Absinthe.Schema.Notation
+
+  alias DiscoveryWeb.Graphql.Routing.Resolvers.ServerResolver
 
   object :server_queries do
     field :servers, :server_paginated_result do
       arg(:filter, :server_filter)
       arg(:pagination, :pagination_filter)
 
-      resolve(&DiscoveryWeb.Graphql.Routing.ServerResolvers.list_servers_pagination/2)
+      resolve(&ServerResolver.list_servers_pagination/2)
     end
 
     field :server, :server do
       arg(:id, non_null(:id))
-      resolve(&DiscoveryWeb.Graphql.Routing.ServerResolvers.server/3)
+      resolve(&ServerResolver.server/3)
     end
   end
 
@@ -19,19 +21,19 @@ defmodule DiscoveryWeb.Graphql.Routing.ServerSchemas do
     field(:create_server, :server_in_response) do
       arg(:input, non_null(:server_create))
 
-      resolve(&DiscoveryWeb.Graphql.Routing.ServerResolvers.create_server/3)
+      resolve(&ServerResolver.create_server/3)
     end
 
     field(:update_server, :server_in_response) do
       arg(:input, non_null(:server_update))
 
-      resolve(&DiscoveryWeb.Graphql.Routing.ServerResolvers.update_server/3)
+      resolve(&ServerResolver.update_server/3)
     end
 
     field(:delete_server, :server_response) do
       arg(:id, non_null(:id))
 
-      resolve(&DiscoveryWeb.Graphql.Routing.ServerResolvers.delete_server/3)
+      resolve(&ServerResolver.delete_server/3)
     end
   end
 
