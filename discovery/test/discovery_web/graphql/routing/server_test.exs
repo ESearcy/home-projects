@@ -3,7 +3,6 @@ defmodule DiscoveryWeb.Graphql.ServerTests do
 
   use Discovery.DataCase, async: true
 
-  alias Discovery.Routing.Schemas.ServerSchema
   @schema DiscoveryWeb.Graphql.Schema.MasterSchema
   # add Permission & duplicate Permission Test#
   describe "Duplicate Permissions" do

@@ -4,16 +4,16 @@ defmodule Discovery.Routing.Logics.ServerLogic do
   def update_server(input) do
     with {:ok, server} <-
            ServerRepository.get_server(input.id),
-         {ok, _} <- ServerRepository.update_server(server, input) do
+         {:ok, _} <- ServerRepository.update_server(server, input) do
       {:ok, Map.merge(%{message: "server info updated"}, server)}
     end
   end
 
-  def list_servers() do
-    {:ok, ServerRepository.list_servers()}
-  end
+  # def list_servers() do
+  #   {:ok, ServerRepository.list_servers()}
+  # end
 
-  def list_servers_pagination(filter \\ {}, pagination \\ {}) do
+  def list_servers_pagination(filter, pagination) do
     ServerRepository.list_servers_pagination(filter, pagination)
   end
 
