@@ -3,7 +3,7 @@ defmodule Discovery.RoutingTest do
 
   alias Discovery.Routing.Repositories.ServerRepository
 
-  describe "servers" do
+  describe "Server Repo Testing" do
     alias Discovery.Routing.Schemas.ServerSchema
 
     @valid_attrs %{
