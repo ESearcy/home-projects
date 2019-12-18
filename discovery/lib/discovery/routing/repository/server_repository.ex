@@ -1,4 +1,4 @@
-defmodule Discovery.Routing.Repositorys.ServerRepository do
+defmodule Discovery.Routing.Repositories.ServerRepository do
   @moduledoc """
   The Routing context.
   """
@@ -11,31 +11,14 @@ defmodule Discovery.Routing.Repositorys.ServerRepository do
   alias Discovery.Routing.Queries.ServerQueries
 
   @doc """
-  Returns the list of servers.
-
-  ## Examples
-
-      iex> list_servers()
-      [%Server{}, ...]
-
+  Returns the list of servers. (shouldn't really be used very much)
   """
   def list_servers do
     Repo.all(ServerSchema)
   end
 
   @doc """
-  Gets a single server.
-
-  Raises `Ecto.NoResultsError` if the Server does not exist.
-
-  ## Examples
-
-      iex> get_server!(123)
-      %Server{}
-
-      iex> get_server!(456)
-      ** (Ecto.NoResultsError)
-
+    Returns the list of servers with pagination info
   """
   def list_servers_pagination(filter \\ %{}, pagination \\ %{}) do
     ServerQueries.server()
@@ -54,16 +37,16 @@ defmodule Discovery.Routing.Repositorys.ServerRepository do
   end
 
   @doc """
+  Gets a single server.
+  """
+  def get_server_by_serial(serial_number) do
+    ServerQueries.server()
+    |> ServerQueries.filter(:serial_number, serial_number)
+    |> CommonQueries.result_one()
+  end
+
+  @doc """
   Creates a server.
-
-  ## Examples
-
-      iex> create_server(%{field: value})
-      {:ok, %Server{}}
-
-      iex> create_server(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
   """
   def create_server(attrs \\ %{}) do
     %ServerSchema{}
@@ -73,15 +56,6 @@ defmodule Discovery.Routing.Repositorys.ServerRepository do
 
   @doc """
   Updates a server.
-
-  ## Examples
-
-      iex> update_server(server, %{field: new_value})
-      {:ok, %Server{}}
-
-      iex> update_server(server, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
   """
   def update_server(%ServerSchema{} = server, attrs) do
     server
@@ -91,15 +65,6 @@ defmodule Discovery.Routing.Repositorys.ServerRepository do
 
   @doc """
   Deletes a Server.
-
-  ## Examples
-
-      iex> delete_server(server)
-      {:ok, %Server{}}
-
-      iex> delete_server(server)
-      {:error, %Ecto.Changeset{}}
-
   """
   def delete_server(%ServerSchema{} = server) do
     Repo.delete(server)
@@ -107,12 +72,6 @@ defmodule Discovery.Routing.Repositorys.ServerRepository do
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking server changes.
-
-  ## Examples
-
-      iex> change_server(server)
-      %Ecto.Changeset{source: %Server{}}
-
   """
   def change_server(%ServerSchema{} = server) do
     ServerSchema.changeset(server, %{})

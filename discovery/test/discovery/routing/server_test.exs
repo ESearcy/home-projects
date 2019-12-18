@@ -1,7 +1,7 @@
 defmodule Discovery.RoutingTest do
   use Discovery.DataCase
 
-  alias Discovery.Routing.Repositorys.ServerRepository
+  alias Discovery.Routing.Repositories.ServerRepository
 
   describe "servers" do
     alias Discovery.Routing.Schemas.ServerSchema
@@ -15,7 +15,8 @@ defmodule Discovery.RoutingTest do
       memory_max: 5,
       public_ip: "some public_ip",
       temp: 42,
-      type: "some type"
+      type: "some type",
+      serial_number: "000000222555aaaccbb"
     }
     @update_attrs %{
       alias: "some updated alias",
@@ -26,7 +27,8 @@ defmodule Discovery.RoutingTest do
       memory_max: 5,
       public_ip: "some updated public_ip",
       temp: 43,
-      type: "some updated type"
+      type: "some updated type",
+      serial_number: "000000222555aaaccbb-updated"
     }
     @invalid_attrs %{
       alias: nil,
@@ -37,7 +39,8 @@ defmodule Discovery.RoutingTest do
       memory_max: "wrong",
       public_ip: nil,
       temp: nil,
-      type: nil
+      type: nil,
+      serial_number: 555
     }
 
     def server_fixture(attrs \\ %{}) do

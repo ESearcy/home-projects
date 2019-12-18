@@ -12,6 +12,7 @@ defmodule Discovery.Routing.Schemas.ServerSchema do
     field(:public_ip, :string)
     field(:temp, :float)
     field(:type, :string)
+    field(:serial_number, :string)
 
     timestamps()
   end
@@ -28,7 +29,8 @@ defmodule Discovery.Routing.Schemas.ServerSchema do
       :memory_available,
       :containers_available,
       :containers_max,
-      :temp
+      :temp,
+      :serial_number
     ])
 
     # |> validate_required([

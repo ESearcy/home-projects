@@ -4,14 +4,14 @@ defmodule DiscoveryWeb.Graphql.Routing.Resolvers.ServerResolver do
   alias Discovery.Routing.Logics.ServerLogic
   alias Discovery.Routing.Schemas.ServerSchema
 
-  def server(_, %{id: id}, _) do
+  def get_server_by_serial(_, %{serial_number: serial_number}, _) do
     ## verify role access
-    ServerLogic.get_server(id)
+    ServerLogic.get_server_by_serial(serial_number)
   end
 
-  def create_server(_, args, _) do
+  def process_server_ping(_, args, _) do
     ## verify role access
-    ServerLogic.create_server(args.input)
+    ServerLogic.process_server_ping(args.input)
   end
 
   @spec list_servers_pagination(map, map) :: Resolvers.paginated_result_t(ServerSchema.t())
@@ -26,14 +26,5 @@ defmodule DiscoveryWeb.Graphql.Routing.Resolvers.ServerResolver do
       )
 
     servers
-  end
-
-  def update_server(_, args, _) do
-    ServerLogic.update_server(args.input)
-  end
-
-  def delete_server(_, %{id: id}, _) do
-    ## verify role access
-    ServerLogic.delete_server(id)
   end
 end

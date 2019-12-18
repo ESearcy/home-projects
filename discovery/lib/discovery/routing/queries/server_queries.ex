@@ -38,6 +38,14 @@ defmodule Discovery.Routing.Queries.ServerQueries do
     )
   end
 
+  def filter(query, :serial_number, value) do
+    where(
+      query,
+      [server: server],
+      server.serial_number == ^value
+    )
+  end
+
   def filter(query, :type, value) do
     where(
       query,

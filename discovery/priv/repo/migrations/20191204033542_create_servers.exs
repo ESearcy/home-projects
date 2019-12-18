@@ -12,6 +12,7 @@ defmodule Discovery.Repo.Migrations.CreateServers do
       add(:containers_available, :integer)
       add(:containers_max, :integer)
       add(:temp, :float)
+      add(:serial_number, :string)
 
       timestamps()
     end
