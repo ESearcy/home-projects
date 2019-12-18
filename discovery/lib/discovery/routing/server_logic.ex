@@ -1,36 +1,33 @@
 defmodule Discovery.Routing.Logics.ServerLogic do
-  alias Discovery.Routing.Repositorys.ServerRepository
+  alias Discovery.Routing.Repositories.ServerRepository
 
-  def update_server(input) do
-    with {:ok, server} <-
-           ServerRepository.get_server(input.id),
-         {:ok, _} <- ServerRepository.update_server(server, input) do
-      {:ok, Map.merge(%{message: "server info updated"}, server)}
+  def process_server_ping(attrs) do
+    # see if server exists
+    case ServerRepository.get_server_by_serial(attrs.serial_number) do
+      {:ok, server} -> update_server(server, attrs)
+      {:error, _} -> create_server(attrs)
     end
   end
-
-  # def list_servers() do
-  #   {:ok, ServerRepository.list_servers()}
-  # end
 
   def list_servers_pagination(filter, pagination) do
     ServerRepository.list_servers_pagination(filter, pagination)
   end
 
-  def get_server(id) do
-    ServerRepository.get_server(id)
-  end
-
-  def create_server(input) do
-    with {:ok, server} <- ServerRepository.create_server(input) do
-      {:ok, Map.merge(%{message: "server info saved"}, server)}
+  defp update_server(server, attrs) do
+    with {:ok, _} <- ServerRepository.update_server(server, attrs) do
+      {:ok, Map.merge(%{message: "server info updated"}, server)}
     end
   end
 
-  def delete_server(id) do
-    with {:ok, server} <- ServerRepository.get_server(id),
-         {:ok, _} <- ServerRepository.delete_server(server) do
-      {:ok, %{message: "server info deleted"}}
+  def get_server_by_serial(serial_number) do
+    ServerRepository.get_server_by_serial(serial_number)
+  end
+
+  defp create_server(attrs) do
+    with {:ok, server} <- ServerRepository.create_server(attrs) do
+      {:ok, Map.merge(%{message: "server added to system"}, server)}
     end
   end
+
+  # make method for weekly cleanup & status updates
 end

@@ -13,7 +13,7 @@ defmodule DiscoveryWeb.Graphql.ServerTests do
         Absinthe.run(
           """
           mutation($input: ServerCreate!) {
-          createServer(input: $input) {
+          pingServer(input: $input) {
           message
           }
           }
@@ -25,7 +25,8 @@ defmodule DiscoveryWeb.Graphql.ServerTests do
               "local_ip" => "some local_ip",
               "public_ip" => "some public_ip",
               "temp" => 42,
-              "type" => "some type"
+              "type" => "some type",
+              "serial_number" => "001122334455abc"
             }
           }
         )
@@ -33,21 +34,49 @@ defmodule DiscoveryWeb.Graphql.ServerTests do
       assert {:ok,
               %{
                 data: %{
-                  "createServer" => %{
-                    "message" => "server info saved"
-                  }
+                  "pingServer" => %{"message" => "server added to system"}
                 }
               }} == result
+
+      result2 =
+        Absinthe.run(
+          """
+          mutation($input: ServerCreate!) {
+          pingServer(input: $input) {
+          message
+          }
+          }
+          """,
+          @schema,
+          variables: %{
+            "input" => %{
+              "alias" => "some alias",
+              "local_ip" => "some local_ip",
+              "public_ip" => "some public_ip",
+              "temp" => 42,
+              "type" => "some updated type",
+              "serial_number" => "001122334455abc"
+            }
+          }
+        )
+
+      assert {:ok,
+              %{
+                data: %{
+                  "pingServer" => %{"message" => "server info updated"}
+                }
+              }} == result2
     end
 
     test "retrieve server" do
       {:ok, result} =
         Absinthe.run(
           """
-          mutation ($input: ServerCreate!) {
-          createServer(input: $input) {
+          mutation($input: ServerCreate!) {
+          pingServer(input: $input) {
           message
           id
+          serial_number
           inserted_at
           }
           }
@@ -55,75 +84,92 @@ defmodule DiscoveryWeb.Graphql.ServerTests do
           @schema,
           variables: %{
             "input" => %{
-              "alias" => "test_create"
+              "alias" => "some alias",
+              "local_ip" => "some local_ip",
+              "public_ip" => "some public_ip",
+              "temp" => 42,
+              "type" => "some type",
+              "serial_number" => "001122334455abc"
             }
-          },
-          context: %{user: %{}}
+          }
         )
 
-      id = result.data |> Map.get("createServer") |> Map.get("id")
-      inserted_at = result.data |> Map.get("createServer") |> Map.get("inserted_at")
+      serial_number = result.data |> Map.get("pingServer") |> Map.get("serial_number")
+      inserted_at = result.data |> Map.get("pingServer") |> Map.get("inserted_at")
 
       query_result =
         Absinthe.run(
           """
           {
-          server(id: #{id}) {
-          id
+          server(serial_number: "#{serial_number}") {
           inserted_at
+          serial_number
           }
           }
           """,
-          @schema,
-          context: %{user: %{}}
+          @schema
         )
 
       expected_result =
-        {:ok, %{data: %{"server" => %{"id" => "#{id}", "inserted_at" => "#{inserted_at}"}}}}
+        {:ok,
+         %{
+           data: %{
+             "server" => %{
+               "serial_number" => "#{serial_number}",
+               "inserted_at" => "#{inserted_at}"
+             }
+           }
+         }}
 
       assert expected_result == query_result
     end
 
     test "retrieve paginated list of currency orders" do
-      my_type = "app"
       # ensure there is a record in the table#
-      {:ok, _result} =
-        Absinthe.run(
-          """
-          mutation ($input: ServerCreate!) {
-          createServer(input: $input) {
-          message
-          id
-          }
-          }
-          """,
-          @schema,
-          variables: %{
-            "input" => %{
-              "type" => my_type
-            }
-          },
-          context: %{user: %{}}
-        )
 
-      {:ok, _result} =
-        Absinthe.run(
-          """
-          mutation ($input: ServerCreate!) {
-          createServer(input: $input) {
-          message
-          id
+      my_type = "some type"
+
+      Absinthe.run(
+        """
+        mutation($input: ServerCreate!) {
+        pingServer(input: $input) {
+        message
+        }
+        }
+        """,
+        @schema,
+        variables: %{
+          "input" => %{
+            "alias" => "some alias",
+            "local_ip" => "some local_ip",
+            "public_ip" => "some public_ip",
+            "temp" => 42,
+            "type" => my_type,
+            "serial_number" => "001122334455abc-first"
           }
+        }
+      )
+
+      Absinthe.run(
+        """
+        mutation($input: ServerCreate!) {
+        pingServer(input: $input) {
+        message
+        }
+        }
+        """,
+        @schema,
+        variables: %{
+          "input" => %{
+            "alias" => "some alias",
+            "local_ip" => "some local_ip",
+            "public_ip" => "some public_ip",
+            "temp" => 42,
+            "type" => my_type,
+            "serial_number" => "001122334455abc-second"
           }
-          """,
-          @schema,
-          variables: %{
-            "input" => %{
-              "type" => "do not find this id please...."
-            }
-          },
-          context: %{user: %{}}
-        )
+        }
+      )
 
       {:ok, result} =
         Absinthe.run(
@@ -142,8 +188,7 @@ defmodule DiscoveryWeb.Graphql.ServerTests do
           }
           }
           """,
-          @schema,
-          context: %{user: %{}}
+          @schema
         )
 
       orders = Map.get(result.data, "servers")

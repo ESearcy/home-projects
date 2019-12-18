@@ -1,5 +1,5 @@
 alias Discovery.Repo
-alias Discovery.Routing.ServerSchema
+alias Discovery.Routing.Schemas.ServerSchema
 
 %ServerSchema{
   alias: "seed",
@@ -10,6 +10,7 @@ alias Discovery.Routing.ServerSchema
   memory_available: 2.0,
   containers_available: 1,
   containers_max: 2,
-  temp: 22.0
+  temp: 22.0,
+  serial_number: "0006572bbaacc"
 }
 |> Repo.insert!()
