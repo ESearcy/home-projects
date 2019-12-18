@@ -1,14 +1,8 @@
 defmodule DiscoveryWeb.Graphql.Routing.Resolvers.ServerResolver do
   import DiscoveryWeb.Graphql.CommonResolvers
 
-  alias Discovery.Routing.Repositorys.ServerRepository
   alias Discovery.Routing.Logics.ServerLogic
   alias Discovery.Routing.Schemas.ServerSchema
-
-  def servers(_, _, _) do
-    ## verify role access
-    ServerLogic.list_servers()
-  end
 
   def server(_, %{id: id}, _) do
     ## verify role access
