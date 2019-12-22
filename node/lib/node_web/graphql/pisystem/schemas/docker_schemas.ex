@@ -1,19 +1,19 @@
-defmodule NodeWeb.Graphql.Pisystem.Schemas.PicontainerSchema do
+defmodule NodeWeb.Graphql.Pisystem.Schemas.DockerSchema do
   use Absinthe.Schema.Notation
 
-  alias NodeWeb.Graphql.Pisystem.Resolvers.PicontainerResolver
+  alias NodeWeb.Graphql.Pisystem.Resolvers.DockerResolver
 
   object :picontainer_queries do
     field :picontainers, :picontainer_paginated_result do
       arg(:filter, :picontainer_filter)
       arg(:pagination, :pagination_filter)
 
-      resolve(&PicontainerResolver.list_picontainers_pagination/2)
+      resolve(&DockerResolver.list_picontainers_pagination/2)
     end
 
     field :picontainer, :picontainer do
       arg(:id, non_null(:string))
-      resolve(&PicontainerResolver.get_picontainer_by_id/3)
+      resolve(&DockerResolver.get_picontainer_by_id/3)
     end
   end
 

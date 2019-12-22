@@ -1,4 +1,4 @@
-defmodule NodeWeb.Graphql.Pisystem.Resolvers.PicontainerResolver do
+defmodule NodeWeb.Graphql.Pisystem.Resolvers.DockerResolver do
   import NodeWeb.Graphql.CommonResolvers
 
   alias Node.Pisystem.Logics.DockerLogic

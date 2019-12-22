@@ -3,7 +3,7 @@ defmodule NodeWeb.Graphql.Schema.MasterSchema do
 
   # import_types(Absinthe.Type.Custom)
 
-  import_types(NodeWeb.Graphql.Pisystem.Schemas.PicontainerSchema)
+  import_types(NodeWeb.Graphql.Pisystem.Schemas.DockerSchema)
   import_types(NodeWeb.Graphql.CommonSchema)
 
   query do
