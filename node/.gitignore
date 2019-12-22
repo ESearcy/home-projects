@@ -26,4 +26,4 @@ node-*.tar
 # we ignore priv/static. You may want to comment
 # this depending on your deployment strategy.
 /priv/static/
-q
+secret.pem

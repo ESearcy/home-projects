@@ -1,19 +1,19 @@
-defmodule NodeWeb.Graphql.Pisystem.Schemas.PicontainerSchema do
+defmodule NodeWeb.Graphql.Pisystem.Schemas.DockerSchema do
   use Absinthe.Schema.Notation
 
-  alias NodeWeb.Graphql.Pisystem.Resolvers.PicontainerResolver
+  alias NodeWeb.Graphql.Pisystem.Resolvers.DockerResolver
 
   object :picontainer_queries do
     field :picontainers, :picontainer_paginated_result do
       arg(:filter, :picontainer_filter)
       arg(:pagination, :pagination_filter)
 
-      resolve(&PicontainerResolver.list_picontainers_pagination/2)
+      resolve(&DockerResolver.list_picontainers_pagination/2)
     end
 
     field :picontainer, :picontainer do
       arg(:id, non_null(:string))
-      resolve(&PicontainerResolver.get_picontainer_by_id/3)
+      resolve(&DockerResolver.get_picontainer_by_id/3)
     end
   end
 
@@ -26,11 +26,15 @@ defmodule NodeWeb.Graphql.Pisystem.Schemas.PicontainerSchema do
 
   input_object :picontainer_filter do
     @desc "normal ID"
-    field(:id, :integer)
-    @desc "filter through currency orders based on type"
-    field(:status, :string)
+    field(:id, list_of(:string))
+    @desc "filter through containers orders based on type"
+    field(:status, list_of(:string))
     @desc "filter through containers based on name"
-    field(:names, :string)
+    field(:names, list_of(:string))
+    @desc "filter through containers based on image type"
+    field(:image, list_of(:string))
+    @desc "filter through containers based on ports"
+    field(:ports, list_of(:string))
   end
 
   object :picontainer do
