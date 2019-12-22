@@ -3,11 +3,13 @@ defmodule Node.PisystemLogicTest do
 
   alias Node.Pisystem.Logics.DockerLogic
 
-  describe "Picontainer Logic Controller Testing" do
+  describe "Picontainer Docker Testing" do
     # @test_docker_image_alias "mongo:latest"
     # @img1_name = test-container-1:latest
     # @img2_name = test-container-2:latest
     # @img3_name = test-container-3:latest
+
+    # docker friendly test environment only - need test env
     test "get_picontainer_by_id" do
       # DockerLogic.get_picontainer_by_id("id_123acb")
       # Start container, save id
@@ -18,6 +20,7 @@ defmodule Node.PisystemLogicTest do
       # assert @mocked_server_response == result
     end
 
+    # docker friendly test environment only - need test env
     test "get_picontainer_by_name" do
       # DockerLogic.get_picontainer_by_id("id_123acb")
       # Start container with test name
@@ -28,6 +31,7 @@ defmodule Node.PisystemLogicTest do
       # assert @mocked_server_response == result
     end
 
+    # docker friendly test environment only - need test env
     test "list_picontainers_pagination & multipule shutdown" do
       # DockerLogic.list_picontainers_pagination(%{names: "search-name"}, %{
       #   page: 1,
@@ -40,12 +44,14 @@ defmodule Node.PisystemLogicTest do
       # query & compare the number of images again
     end
 
+    # docker friendly test environment only - need test env
     test "start & stop docker container" do
       # start single container take id
       # stop a docker container using the above id
       # todo
     end
 
+    # docker friendly test environment only - need test env
     test "killall && cleanall" do
       # start single container take id
       # stop a docker container using the above id
