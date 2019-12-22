@@ -4,73 +4,52 @@ defmodule Node.PisystemLogicTest do
   alias Node.Pisystem.Logics.DockerLogic
 
   describe "Picontainer Logic Controller Testing" do
-    @create_attribs %{
-      serial_number: "12345",
-      alias: "logic_test_ping_create",
-      containers_available: 1,
-      containers_max: 4,
-      local_ip: "195.21.6.5",
-      memory_available: 4,
-      memory_max: 4,
-      message: "picontainer added to system",
-      public_ip: "128.0.0.5",
-      temp: 37,
-      type: "none"
-    }
-    @mocked_server_response {:ok,
-                             %{
-                               command: "mocked-startpoint.sh",
-                               created: "mocked 1 day ago",
-                               id: "mocked-123acb",
-                               names: "postgresql-mock",
-                               ports: "5432:5432,tcp",
-                               status: "running"
-                             }}
-    @mocked_paginated_response {:ok,
-                                %{
-                                  list: [
-                                    %{
-                                      command: "mocked-startpoint.sh",
-                                      created: "mocked 1 day ago",
-                                      id: "mocked-123acb",
-                                      names: "postgresql-mock",
-                                      ports: "5432:5432,tcp",
-                                      status: "running"
-                                    },
-                                    %{
-                                      command: "mocked-startpoint.sh",
-                                      created: "mocked 1 day ago",
-                                      id: "mocked-123acb",
-                                      names: "postgresql-mock",
-                                      ports: "5432:5432,tcp",
-                                      status: "running"
-                                    },
-                                    %{
-                                      command: "mocked-startpoint.sh",
-                                      created: "mocked 1 day ago",
-                                      id: "mocked-123acb",
-                                      names: "postgresql-mock",
-                                      ports: "5432:5432,tcp",
-                                      status: "running"
-                                    }
-                                  ],
-                                  pagination: %{page: 1, page_size: 10, pages: 1, total: 0}
-                                }}
-
+    # @test_docker_image_alias "mongo:latest"
+    # @img1_name = test-container-1:latest
+    # @img2_name = test-container-2:latest
+    # @img3_name = test-container-3:latest
     test "get_picontainer_by_id" do
-      result = DockerLogic.get_picontainer_by_id("id_123acb")
-
+      # DockerLogic.get_picontainer_by_id("id_123acb")
+      # Start container, save id
+      # query for container with id of ...
+      # ensure id matches
+      # ensure not null
+      # shut down container
       # assert @mocked_server_response == result
     end
 
-    test "list_picontainers_pagination" do
-      result =
-        DockerLogic.list_picontainers_pagination(%{names: "search-name"}, %{
-          page: 1,
-          pageSize: 10
-        })
+    test "get_picontainer_by_name" do
+      # DockerLogic.get_picontainer_by_id("id_123acb")
+      # Start container with test name
+      # query for container with name of ...
+      # ensure name matches
+      # ensure not null
+      # shut down container
+      # assert @mocked_server_response == result
+    end
 
-      # assert @mocked_paginated_response = result
+    test "list_picontainers_pagination & multipule shutdown" do
+      # DockerLogic.list_picontainers_pagination(%{names: "search-name"}, %{
+      #   page: 1,
+      #   pageSize: 1
+      # })
+      # query for number of current images
+      # start up 3 images
+      # list with page size of 2, double check total is previous total +3
+      # shutdown test related images
+      # query & compare the number of images again
+    end
+
+    test "start & stop docker container" do
+      # start single container take id
+      # stop a docker container using the above id
+      # todo
+    end
+
+    test "killall && cleanall" do
+      # start single container take id
+      # stop a docker container using the above id
+      # todo
     end
   end
 end

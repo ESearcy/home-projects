@@ -26,11 +26,15 @@ defmodule NodeWeb.Graphql.Pisystem.Schemas.PicontainerSchema do
 
   input_object :picontainer_filter do
     @desc "normal ID"
-    field(:id, :integer)
-    @desc "filter through currency orders based on type"
-    field(:status, :string)
+    field(:id, list_of(:string))
+    @desc "filter through containers orders based on type"
+    field(:status, list_of(:string))
     @desc "filter through containers based on name"
-    field(:names, :string)
+    field(:names, list_of(:string))
+    @desc "filter through containers based on image type"
+    field(:image, list_of(:string))
+    @desc "filter through containers based on ports"
+    field(:ports, list_of(:string))
   end
 
   object :picontainer do
