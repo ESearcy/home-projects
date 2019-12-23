@@ -23,7 +23,7 @@ defmodule NodeWeb.Graphql.CommonSchema do
     field(:page_size, :integer)
   end
 
-  object :picontainer_message do
+  object :docker_container_message do
     field(:message, :string)
   end
 end

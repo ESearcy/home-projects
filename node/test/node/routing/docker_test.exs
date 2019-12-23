@@ -1,17 +1,17 @@
-defmodule Node.PisystemLogicTest do
+defmodule Node.DockerTest do
   use Node.DataCase
 
   alias Node.Pisystem.Logics.DockerLogic
 
-  describe "Picontainer Docker Testing" do
+  describe "Docker Testing" do
     # @test_docker_image_alias "mongo:latest"
     # @img1_name = test-container-1:latest
     # @img2_name = test-container-2:latest
     # @img3_name = test-container-3:latest
 
     # docker friendly test environment only - need test env
-    test "get_picontainer_by_id" do
-      # DockerLogic.get_picontainer_by_id("id_123acb")
+    test "get_docker_container_by_id" do
+      # DockerLogic.get_docker_container_by_id("id_123acb")
       # Start container, save id
       # query for container with id of ...
       # ensure id matches
@@ -21,8 +21,8 @@ defmodule Node.PisystemLogicTest do
     end
 
     # docker friendly test environment only - need test env
-    test "get_picontainer_by_name" do
-      # DockerLogic.get_picontainer_by_id("id_123acb")
+    test "get_docker_container_by_name" do
+      # DockerLogic.get_docker_container_by_id("id_123acb")
       # Start container with test name
       # query for container with name of ...
       # ensure name matches
@@ -32,8 +32,8 @@ defmodule Node.PisystemLogicTest do
     end
 
     # docker friendly test environment only - need test env
-    test "list_picontainers_pagination & multipule shutdown" do
-      # DockerLogic.list_picontainers_pagination(%{names: "search-name"}, %{
+    test "list_docker_containers_pagination & multipule shutdown" do
+      # DockerLogic.list_docker_containers_pagination(%{names: "search-name"}, %{
       #   page: 1,
       #   pageSize: 1
       # })
@@ -52,7 +52,7 @@ defmodule Node.PisystemLogicTest do
     end
 
     # docker friendly test environment only - need test env
-    test "killall && cleanall" do
+    test "killall && cleanall docker containers" do
       # start single container take id
       # stop a docker container using the above id
       # todo

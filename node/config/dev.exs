@@ -44,7 +44,7 @@ config :node, NodeWeb.Endpoint,
 #     ],
 #
 # If desired, both `http:` and `https:` keys can be
-# configured to run both http and https picontainers on
+# configured to run both http and https docker_containers on
 # different ports.
 
 # Do not include metadata nor timestamps in development logs

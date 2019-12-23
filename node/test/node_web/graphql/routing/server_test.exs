@@ -34,7 +34,7 @@
 #       assert {:ok,
 #               %{
 #                 data: %{
-#                   "pingPicontainer" => %{"message" => "picontainer added to system"}
+#                   "pingPicontainer" => %{"message" => "docker_container added to system"}
 #                 }
 #               }} == result
 
@@ -63,12 +63,12 @@
 #       assert {:ok,
 #               %{
 #                 data: %{
-#                   "pingPicontainer" => %{"message" => "picontainer info updated"}
+#                   "pingPicontainer" => %{"message" => "docker_container info updated"}
 #                 }
 #               }} == result2
 #     end
 
-#     test "retrieve picontainer" do
+#     test "retrieve docker_container" do
 #       {:ok, result} =
 #         Absinthe.run(
 #           """
@@ -101,7 +101,7 @@
 #         Absinthe.run(
 #           """
 #           {
-#           picontainer(serial_number: "#{serial_number}") {
+#           docker_container(serial_number: "#{serial_number}") {
 #           inserted_at
 #           serial_number
 #           }
@@ -114,7 +114,7 @@
 #         {:ok,
 #          %{
 #            data: %{
-#              "picontainer" => %{
+#              "docker_container" => %{
 #                "serial_number" => "#{serial_number}",
 #                "inserted_at" => "#{inserted_at}"
 #              }
@@ -175,7 +175,7 @@
 #         Absinthe.run(
 #           """
 #           query{
-#           picontainers(pagination: {pageSize: 5, page: 1}, filter: {type: "#{my_type}"}){
+#           docker_containers(pagination: {pageSize: 5, page: 1}, filter: {type: "#{my_type}"}){
 #           list{
 #           type
 #           }
@@ -191,7 +191,7 @@
 #           @schema
 #         )
 
-#       orders = Map.get(result.data, "picontainers")
+#       orders = Map.get(result.data, "docker_containers")
 #       list = orders |> Map.get("list")
 #       assert length(list) > 0
 

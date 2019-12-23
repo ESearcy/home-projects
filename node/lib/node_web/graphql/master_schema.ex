@@ -7,7 +7,7 @@ defmodule NodeWeb.Graphql.Schema.MasterSchema do
   import_types(NodeWeb.Graphql.CommonSchema)
 
   query do
-    import_fields(:picontainer_queries)
+    import_fields(:docker_container_queries)
   end
 
   def middleware(middleware, _field, %Absinthe.Type.Object{identifier: identifier})

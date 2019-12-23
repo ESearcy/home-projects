@@ -1,7 +1,7 @@
 defmodule Node.Pisystem.Logics.DockerLogic do
   alias Node.Common
 
-  def list_picontainers_pagination(filter, pagination) do
+  def list_docker_containers_pagination(filter, pagination) do
     containers = get_docker()
 
     filtered_containers = Common.filter_inclusive_or(containers, filter)
@@ -9,7 +9,7 @@ defmodule Node.Pisystem.Logics.DockerLogic do
     {:ok, paginated_containers}
   end
 
-  def get_picontainer_by_id(id) do
+  def get_docker_container_by_id(id) do
     containers = get_docker()
     filtered_containers = Common.filter_inclusive_or(containers, %{id: [id]})
     (length(filtered_containers) == 1) |> IO.inspect()
@@ -18,16 +18,6 @@ defmodule Node.Pisystem.Logics.DockerLogic do
       true -> {:ok, List.first(filtered_containers)}
       false -> {:error, "cound not find containers with id: #{id}"}
     end
-  end
-
-  def mock_pi_container do
-    %{
-      id: "mocked-123acb",
-      image: "mocked-postgres",
-      status: "running",
-      ports: "5432:5432,tcp",
-      names: "postgresql-mock"
-    }
   end
 
   def get_docker() do
@@ -42,7 +32,6 @@ defmodule Node.Pisystem.Logics.DockerLogic do
     list = Enum.map(lines, fn x -> split_line_into_column(x) end)
 
     list = Enum.filter(list, &(!is_nil(&1)))
-    # do pagination stuff, fix magic numbers
     list
   end
 
