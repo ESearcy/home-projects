@@ -1,15 +1,3 @@
-bittc.build:
-	docker.build
-
-bittc.down:
-	docker.down
-
-bittc.test:
-	docker.up test docker.down
-
-bittc.up:
-	docker-compose up -d
-
 docker.build: docker.build.dev
 
 docker.build.dev:
