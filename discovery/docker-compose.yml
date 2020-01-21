@@ -15,7 +15,7 @@ services:
 
   app:
     container_name: discovery-server
-    image: discovery:1.0
+    image: esaucy/discovery:latest
     build: .
     entrypoint: make docker.entrypoint
     environment:

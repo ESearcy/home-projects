@@ -10,20 +10,26 @@ docker-compose up
 
 Launch just this project, no postgres. 
 
+build image push to dockerhub
+docker image build -t discovery:latest .
+docker image tag discovery:latest esaucy/discovery:latest
+docker image push esaucy/discovery:latest 
+
+
 in swarm as a service:
 single app - wont work without postgres
-docker image build -t discovery:1.0 .
-docker service create --name discovery-server discovery:1.0
+docker service create --name discovery-server discovery:latest
 docker service ps discovery-server
 docker service logs discovery-server
 docker service rm discovery-server
 
 --as a deployment
-docker container run --publish 4000:4000 --detach --name discovery-server discovery:1.0
+docker container run --publish 4000:4000 --detach --name discovery-server discovery:latest
 docker container rm --force discovery-server
 
 as swarm:
-docker stack deploy -c docker-compose.yml discovery-server
+docker stack deploy -c docker-compose.yml discovery-app
 docker stack ls
-docker service logs -f discovery-server
-docker stack rm discovery-server
+docker stack services discovery-app
+docker service logs -f discovery-app
+docker stack rm discovery-app
