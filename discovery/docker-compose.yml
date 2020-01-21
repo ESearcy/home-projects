@@ -1,0 +1,36 @@
+---
+version: '3.7'
+
+services:
+  db:
+    container_name: postgres
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - default
+    ports:
+      - "7432:5432"
+
+  app:
+    container_name: discovery-server
+    image: esaucy/discovery:latest
+    build: .
+    entrypoint: make docker.entrypoint
+    environment:
+      POSTGRES_HOST: db
+      PORT: 4000
+    depends_on:
+      - db
+    networks:
+      - default
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+      - ./.docker-volumes/discovery-build:/app/_build
+
+networks:
+  default:
+    driver: bridge

@@ -1,7 +1,7 @@
 guide https://pragmaticstudio.com/tutorials/how-to-setup-graphql-in-a-phoenix-app
 
 `mix phx.new node --no-html --no-webpack`
-`mix phx.gen.context Pisystem Picontainer picontainers alias:string type:string local_ip:string public_ip:string memory_max:float memory_available:float containers_available:integer containers_max:integer temp:float`
+`mix phx.gen.context Pisystem Picontainer docker_containers alias:string type:string local_ip:string public_ip:string memory_max:float memory_available:float containers_available:integer containers_max:integer temp:float`
 
 `mix ecto.create`
 `mix ecto.migrate`
@@ -10,11 +10,11 @@ guide https://pragmaticstudio.com/tutorials/how-to-setup-graphql-in-a-phoenix-ap
 
 Start with:
 
-`mix phx.picontainer`
+`mix phx.docker_container`
 
 inside IEx (Interactive Elixir) as:
 
-`iex -S mix phx.picontainer`
+`iex -S mix phx.docker_container`
 
 
 strap on the GraphQL layer

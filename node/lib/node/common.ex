@@ -5,7 +5,6 @@ defmodule Node.Common do
         paginate_list(list, page, pageSize)
 
       %{} ->
-        # default
         paginate_list(list, 1, 5)
     end
   end
@@ -40,7 +39,6 @@ defmodule Node.Common do
         list2 =
           for value <- v do
             list = filter_list_on_key(list, k, value)
-            list |> IO.inspect()
             list
           end
 
