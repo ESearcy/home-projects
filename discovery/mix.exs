@@ -44,7 +44,8 @@ defmodule Discovery.MixProject do
       {:absinthe, "~> 1.4"},
       {:absinthe_plug, "~> 1.4"},
       {:absinthe_phoenix, "~> 1.4"},
-      {:scrivener_ecto, "~> 2.2"}
+      {:scrivener_ecto, "~> 2.2"},
+      {:git_hooks, "~> 0.4.0", only: [:test, :dev], runtime: false}
     ]
   end
 
