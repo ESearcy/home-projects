@@ -197,7 +197,7 @@ extract_boolean({_Token, _Line, "true"}) ->
 extract_boolean({_Token, _Line, "false"}) ->
   false.
 
--file("/usr/local/Cellar/erlang/22.1.8/lib/erlang/lib/parsetools-2.1.8/include/yeccpre.hrl", 0).
+-file("c:/Program Files/erl10.3/lib/parsetools-2.1.8/include/yeccpre.hrl", 0).
 %%
 %% %CopyrightBegin%
 %%

@@ -33,3 +33,10 @@ docker stack ls
 docker stack services discovery-app
 docker service logs -f discovery-app
 docker stack rm discovery-app
+
+
+Developer Setup:
+Install Elixir & erlang 1.10
+
+run:
+mix deps.get

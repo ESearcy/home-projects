@@ -25,7 +25,7 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-#github hooks and stuff
+# github hooks and stuff
 if Mix.env() != :prod do
   config :git_hooks,
     verbose: true,
@@ -37,7 +37,7 @@ if Mix.env() != :prod do
           "mix xref deprecated --abort-if-any",
           "mix xref unreachable --abort-if-any",
           "mix format --check-formatted",
-          "mix credo --strict",
+          "mix credo --config-file=.credo.exs list --all --strict --format=oneline",
           "mix doctor --summary",
           "mix test"
         ]

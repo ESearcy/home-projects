@@ -1,4 +1,4 @@
--file("/usr/local/Cellar/erlang/22.1.8/lib/erlang/lib/parsetools-2.1.8/include/leexinc.hrl", 0).
+-file("c:/Program Files/erl10.3/lib/parsetools-2.1.8/include/leexinc.hrl", 0).
 %% The source of this file is part of leex distribution, as such it
 %% has the same Copyright as the other files in the leex
 %% distribution. The Copyright is defined in the accompanying file
@@ -14,7 +14,7 @@
 %% User code. This is placed here to allow extra attributes.
 -file("src/absinthe_lexer.xrl", 64).
 
--file("/usr/local/Cellar/erlang/22.1.8/lib/erlang/lib/parsetools-2.1.8/include/leexinc.hrl", 14).
+-file("c:/Program Files/erl10.3/lib/parsetools-2.1.8/include/leexinc.hrl", 14).
 
 format_error({illegal,S}) -> ["illegal characters ",io_lib:write_string(S)];
 format_error({user,S}) -> S.
@@ -1986,4 +1986,4 @@ yyaction_7(TokenChars, TokenLine) ->
 yyaction_8(TokenChars, TokenLine) ->
      { token, { name, TokenLine, TokenChars } } .
 
--file("/usr/local/Cellar/erlang/22.1.8/lib/erlang/lib/parsetools-2.1.8/include/leexinc.hrl", 313).
+-file("c:/Program Files/erl10.3/lib/parsetools-2.1.8/include/leexinc.hrl", 313).
