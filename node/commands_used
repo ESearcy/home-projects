@@ -19,3 +19,37 @@ inside IEx (Interactive Elixir) as:
 
 strap on the GraphQL layer
 model from this PR: 
+
+commands to run to setup nas ftp folder
+
+sudo cp /etc/fstab /etc/fstab.backup
+echo '192.168.86.196 nas-one' >> /etc/hosts
+sudo update-rc.d rpcbind enable
+touch /root/.netrc
+echo 'machine nas-one' >> /root/.netrc
+echo 'login admin' >> /root/.netrc
+echo 'password 1080012' >> /root/.netrc
+mkdir /media/ftp
+echo 'curlftpfs#nas-one /media/ftp fuse allow_other,uid=1000,gid=1000,umask=0022,_netdev,x-systemd.automount 0 0' >> /etc/fstab
+
+
+setup nas server alias - 
+echo '192.168.86.196 nas-one' >> /etc/hosts
+
+touch /root/.netrc
+echo 'machine nas-one' >> /root/.netrc
+echo 'login admin' >> /root/.netrc
+echo 'password 1080012' >> /root/.netrc
+
+
+apt-get install curlftpfs
+mkdir /media/ftp
+curlftpfs admin:1080012@nas-one /media/ftp
+curlftpfs admin:1080012@192.168.86.196 /media/ftp
+ls /media/ftp
+ls /media/ftp/disk1/
+ls /media/ftp/disk1/dev
+
+#put in /etc/fstab file
+
+echo 'curlftpfs#nas-one /media/ftp fuse allow_other,uid=1000,gid=1000,umask=0022,_netdev,x-systemd.automount 0 0' >> /etc/fstab
