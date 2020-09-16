@@ -1,4 +1,0 @@
-# PiUmbrella
-
-**TODO: Add description**
-
